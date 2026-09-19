@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NF WORLD - অর্ডার ফরম</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; }
+    
+    body { 
+      background: #f1f5f9; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      min-height: 100vh; 
+      padding: 10px; 
+    }
+    
+    .order-card { 
+      background: #ffffff; 
+      width: 100%; 
+      max-width: 350px; 
+      padding: 14px 12px; 
+      border-radius: 10px; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+      border: 1px solid #e2e8f0;
+    }
+
+    .header-container { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #f1f5f9;
+      position: relative;
+      height: 60px;
+    }
+    
+    .header-container img { 
+      height: 70px; 
+      width: auto; 
+      object-fit: contain;
+      margin-left: 10px;
+    }
+
+    .header-container h2 { 
+      color: #0284c7; 
+      font-size: 22px; 
+      font-weight: 800; 
+      position: absolute;
+      left: 55%; 
+      transform: translateX(-50%);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .form-group { margin-bottom: 7px; }
+    .form-group label { display: block; margin-bottom: 2px; font-size: 11.5px; font-weight: 600; color: #334155; }
+    .form-group label .required { color: #ef4444; margin-left: 2px; font-weight: bold; }
+    .form-group label span.note { font-size: 9.5px; color: #64748b; font-weight: normal; }
+    
+    .form-group input, .form-group select, .form-group textarea { 
+      width: 100%; 
+      padding: 6px 8px; 
+      border: 1px solid #cbd5e1; 
+      border-radius: 5px; 
+      font-size: 12px; 
+      color: #0f172a;
+      outline: none; 
+      background-color: #f8fafc;
+      transition: all 0.2s ease;
+    }
+    
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { 
+      border-color: #0284c7; 
+      background-color: #ffffff;
+      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.12); 
+    }
+
+    ::placeholder { color: #94a3b8; font-size: 11px; opacity: 0.85; }
+
+    .submit-btn { 
+      width: 100%; 
+      padding: 8px; 
+      background: linear-gradient(135deg, #0284c7 0%, #059669 100%); 
+      color: #ffffff; 
+      border: none; 
+      border-radius: 5px; 
+      font-size: 13.5px; 
+      font-weight: 700; 
+      cursor: pointer; 
+      margin-top: 4px;
+      box-shadow: 0 2px 5px rgba(2, 132, 199, 0.2);
+      transition: all 0.2s;
+    }
+    .submit-btn:hover { opacity: 0.95; }
+    .submit-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+
+    .helpline-box {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed #e2e8f0;
+      text-align: center;
+      font-size: 11.5px;
+      color: #475569;
+      font-weight: 600;
+    }
+    .helpline-box .phone-link {
+      color: #0284c7;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 12.5px;
+    }
+    .copy-btn {
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-left: 4px;
+      transition: all 0.2s;
+    }
+
+    .success-card { 
+      display: none; 
+      text-align: center;
+      padding: 10px 5px;
+    }
+    .success-card .success-logo {
+      height: 100px; 
+      width: auto;
+      margin-bottom: 12px;
+    }
+    .success-card .main-msg { 
+      font-size: 15px; 
+      color: #047857; 
+      font-weight: 700; 
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .success-card .sub-msg { 
+      font-size: 12px; 
+      color: #334155; 
+      font-weight: 500; 
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+<div class="order-card">
+
+  <div class="header-container" id="mainHeader">
+    <img src="https://i.ibb.co/YrpFtQY/image-8.jpg" alt="NF WORLD Logo">
+    <h2>অর্ডার ফরম</h2>
+  </div>
+  
+  <form id="orderForm">
+    <div class="form-group">
+      <label>কাস্টমারের নাম <span class="required">*</span></label>
+      <input type="text" id="name" placeholder="আপনার নাম লিখুন" required>
+    </div>
+
+    <div class="form-group">
+      <label>মোবাইল নম্বর <span class="required">*</span> <span class="note">(ইংরেজিতে)</span></label>
+      <input type="tel" id="phone" placeholder="017XXXXXXXX" pattern="[0-9]{11}" title="১১ ডিজিটের নম্বরটি ইংরেজিতে লিখুন" required>
+    </div>
+
+    <div class="form-group">
+      <label>জেলা <span class="required">*</span></label>
+      <select id="district" onchange="loadUpazilas()" required>
+        <option value="">জেলা নির্বাচন করুন</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>থানা / উপজেলা <span class="required">*</span></label>
+      <select id="upazila" required>
+        <option value="">আগে জেলা নির্বাচন করুন</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>গ্রাম / এলাকা <span class="required">*</span></label>
+      <input type="text" id="village" placeholder="গ্রাম বা এলাকার নাম লিখুন" required>
+    </div>
+
+    <div class="form-group">
+      <label>সম্পূর্ণ ঠিকানার বিবরণ</label>
+      <textarea id="address" rows="2" placeholder="রোড নম্বর, বাসা নম্বর বা পরিচিত স্থান" required></textarea>
+    </div>
+
+    <button type="submit" id="submitBtn" class="submit-btn">অর্ডার কনফার্ম করুন</button>
+  </form>
+
+  <div id="successMessage" class="success-card">
+    <img src="https://i.ibb.co/YrpFtQY/image-8.jpg" alt="NF WORLD Logo" class="success-logo">
+    <div class="main-msg">আপনার অর্ডার ফরম টি সফলভাবে সাবমিট হয়েছে।</div>
+    <div class="sub-msg">২৪ ঘন্টার মধ্যে আমাদের কাস্টমার কেয়ার প্রতিনিধি থেকে কল করে আপনার অর্ডারটি কনফার্ম হয়েছে কিনা তা জানিয়ে দেওয়া হবে।</div>
+  </div>
+
+  <div class="helpline-box">
+    Helpline: <a href="tel:09658699887" class="phone-link">0 9658-699887</a>
+    <button type="button" class="copy-btn" onclick="copyNumber()" id="copyBtn">কপি করুন</button>
+  </div>
+</div>
+
+<script>
+  const districtThanas = {
+    "কুমিল্লা": ["মেঘনা", "দেবীদ্বার", "হোমনা", "দাউদকান্দি", "মুরাদনগর", "চান্দিনা", "লাকসাম", "সদর দক্ষিণ", "কুমিল্লা সদর", "বরুড়া", "বুড়িচং", "ব্রাহ্মণপাড়া", "চৌদ্দগ্রাম", "মনোহরগঞ্জ", "তিতাস", "নাঙ্গলকোট", "লালমাই"],
+    "ঢাকা": ["ধানমন্ডি", "গুলশান", "মিরপুর", "সাভার", "উত্তরা", "ধামরাই", "কেরানীগঞ্জ", "নবাবগঞ্জ", "দোহার", "মোহাম্মদপুর", "বাড্ডা", "বনানী", "মতিঝিল", "পল্টন", "শাহবাগ", "যাত্রাবাড়ী", "লালবাগ", "তেজগাঁও", "কামরাঙ্গীরচর", "ডেমরা"],
+    "চট্টগ্রাম": ["কোতোয়ালী", "হাটহাজারী", "পতেঙ্গা", "পাঁচলাইশ", "ডবলমুরিং", "পাহাড়তলী", "বন্দর", "চান্দগাঁও", "আনোয়ারা", "বাঁশখালী", "বোয়ালখালী", "চন্দনাইশ", "ফটিকছড়ি", "লোহাগাড়া", "মিরসরাই", "পটিয়া", "রাঙ্গুনিয়া", "রাওজান", "সীতাকুণ্ড", "সন্দীপ"],
+    "গাজীপুর": ["জয়দেবপুর", "কালীগঞ্জ", "শ্রীপুর", "কাপাসিয়া", "কালিয়াকৈর", "টঙ্গী"],
+    "নারায়ণগঞ্জ": ["সদর", "সোনারগাঁও", "রূপগঞ্জ", "আড়াইহাজার", "বন্দর"],
+    "নরসিংদী": ["সদর", "পলাশ", "শিবপুর", "রায়পুরা", "বেলাবো", "মনোহরদী"],
+    "মানিকগঞ্জ": ["সদর", "সিঙ্গাইর", "ঘিওর", "দৌলতপুর", "সাটুরিয়া", "শিবালয়", "হরিরামপুর"],
+    "মুন্সিগঞ্জ": ["সদর", "সিরাজদিখান", "শ্রীনগর", "লৌহজং", "গজারিয়া", "টঙ্গীবাড়ী"],
+    "ফরিদপুর": ["সদর", "আলফাডাঙা", "বোয়ালমারী", "চরভদ্রাসন", "নগরকান্দা", "মধুখালী", "সদরপুর", "সালথা", "ভাঙা"],
+    "গোপালগঞ্জ": ["সদর", "কাশিয়ানী", "কোটালীপাড়া", "মুকসুদপুর", "টুঙ্গিপাড়া"],
+    "মাদারীপুর": ["সদর", "কালকিনি", "রাজৈর", "শিবচর", "ডাসার"],
+    "রাজবাড়ী": ["সদর", "বালিয়াকান্দি", "গোয়ালন্দ", "পাংশা", "কালুখালী"],
+    "শরীয়তপুর": ["সদর", "ডামুড্যা", "নড়িয়া", "ভেদরগঞ্জ", "জাজিরা", "গোসাইরহাট"],
+    "কিশোরগঞ্জ": ["সদর", "অষ্টগ্রাম", "ইটনা", "করিমগঞ্জ", "কটিয়াদী", "কুলিয়ারচর", "তাড়াইল", "নিকলী", "পাকুন্দিয়া", "বাজিতপুর", "ভৈরব", "মিঠামইন", "হোসেনপুর"],
+    "টাঙ্গাইল": ["সদর", "বাসাইল", "ভুয়াপুর", "দে科学দুয়ার", "ঘাটাইল", "গোপালপুর", "কালিহাতী", "মধুপুর", "মির্জাপুর", "নাগরপুর", "সখিপুর", "ধনবাড়ী"],
+    "কক্সবাজার": ["সদর", "চকোরিয়া", "কুতুবদিয়া", "মহেশখালী", "রামু", "টেকনাফ", "উখিয়া", "পেকুয়া", "ঈদগাঁও"],
+    "রাঙ্গামাটি": ["সদর", "কাউখালী", "কাপ্তাই", "জুরাছড়ি", "লংগদু", "নানিয়ারচর", "বরকল", "বিলাইছড়ি", "বাঘাইছড়ি", "রাজস্থলী"],
+    "বান্দরবান": ["সদর", "থানচি", "লামা", "রুমা", "রৌংছড়ি", "নাইক্ষ্যংছড়ি", "আলিকদম"],
+    "খাগড়াছড়ি": ["সদর", "দীঘিনালা", "পানছড়ি", "মহালছড়ি", "মাটিরাঙ্গা", "মানিকছড়ি", "রামগড়", "লক্ষ্মীছড়ি", "গুয়ামারা"],
+    "ফেনী": ["সদর", "ছাগলনাইয়া", "দাগনভূঞা", "পরশুরাম", "ফুলগাজী", "সোনাগাজী"],
+    "লক্ষ্মীপুর": ["সদর", "রায়পুর", "রামগঞ্জ", "রামগতি", "কমলনগর"],
+    "চাঁদপুর": ["সদর", "ফরিদগঞ্জ", "হাইমচর", "হাজীগঞ্জ", "কচুয়া", "মতলব উত্তর", "মতলব দক্ষিণ", "শাহরাস্তি"],
+    "ব্রাহ্মণবাড়িয়া": ["সদর", "আশুগঞ্জ", "কসবা", "নবীনগর", "নাসিরনগর", "বাঞ্ছারামপুর", "সরাইল", "বিজয়নগর", "আখাউড়া"],
+    "নোয়াখালী": ["সদর", "বেগমগঞ্জ", "চাটখিল", "কোম্পানীগঞ্জ", "হাতিয়া", "সেনবাগ", "সুবর্ণচর", "সোনারগাঁও", "কবীরহাট"],
+    "রাজশাহী": ["বোয়ালিয়া", "বাঘা", "পুঠিয়া", "পবা", "গোদাগাড়ী", "তানোর", "বাগমারা", "দুর্গাপুর", "চারঘাট", "মতিহার", "শাহমখদুম", "রাজপাড়া"],
+    "চাঁপাইনবাবগঞ্জ": ["সদর", "গোমস্তাপুর", "নাচোল", "ভোলাহাট", "শিবগঞ্জ"],
+    "নাটোর": ["সদর", "বাগাতিপাড়া", "বড়াইগ্রাম", "গুরুদাসপুর", "লালপুর", "সিংড়া", "নলডাঙ্গা"],
+    "নওগাঁ": ["সদর", "অত্রাই", "বদলগাছী", "ধামইরহাট", "মান্দা", "মহাদেবপুর", "নিয়ামতপুর", "পত্নীতলা", "পোরশা", "রানীনগর", "সাপাহার"],
+    "পাবনা": ["সদর", "আটঘরিয়া", "বেড়া", "ভাঙ্গুড়া", "চাটমোহর", "ফরিদপুর", "ঈশ্বরদী", "সাঁথিয়া", "সুজানগর"],
+    "সিরাজগঞ্জ": ["সদর", "বেলকুচি", "চৌহালী", "কামারখন্দ", "কাজীপুর", "রায়গঞ্জ", "শাহজাদপুর", "তারাস", "উল্লাপাড়া"],
+    "বগুড়া": ["বগুড়া সদর", "শেরপুর", "শিবগঞ্জ", "আদমদীঘি", "দুপুরচাঁচিয়া", "গাবতলী", "কাহালু", "নন্দীগ্রাম", "সারিয়াকান্দি", "শাজাহানপুর", "ধুনট", "সোনাতলা"],
+    "জয়পুরহাট": ["সদর", "আক্কেলপুর", "কালাই", "ক্ষেতলাল", "পাঁচবিবি"],
+    "খুলনা": ["সদর", "ডুমুরিয়া", "বটিয়াঘাটা", "দাকোপ", "ফুলাতলা", "দিঘলিয়া", "কয়রা", "পাইকগাছা", "রূপসা", "তেরখাদা", "সোনাডাঙ্গা", "খালিশপুর", "দৌলতপুর"],
+    "যশোর": ["সদর", "অভয়নগর", "বাঘারপাড়া", "চৌগাছা", "ঝিকরগাছা", "কেশপুর", "মণিরামপুর", "শার্শা"],
+    "সাতক্ষীরা": ["সদর", "আশাশুনি", "দেহাটা", "কালীগঞ্জ", "কোলারোয়া", "শ্যামনগর", "তালা"],
+    "বাগেরহাট": ["সদর", "চিতলমারী", "ফকিরহাট", "মোংলা", "মোরেলগঞ্জ", "মোল্লাহাট", "রামপাল", "শরণখোলা", "কচুয়া"],
+    "ঝিনাইদহ": ["সদর", "হরিণাকুণ্ডু", "কালীগঞ্জ", "কোটচাঁদপুর", "মহেশপুর", "শৈলকুপা"],
+    "কুষ্টিয়া": ["সদর", "ভেরামারা", "দৌলতপুর", "খোকসা", "কুমারখালী", "মিরপুর"],
+    "মাগুরা": ["সদর", "মোহাম্মদপুর", "শালিখা", "শ্রীপুর"],
+    "নড়াইল": ["সদর", "কালিয়া", "লোহাগড়া"],
+    "চুয়াডাঙ্গা": ["সদর", "আলমডাঙ্গা", "দামুড়হুদা", "জীবননগর"],
+    "মেহেরপুর": ["সদর", "গাংনী", "মুজিবনগর"],
+    "বরিশাল": ["কোতোয়ালী", "বাকেরগঞ্জ", "গৌরনদী", "আগৈলঝাড়া", "বাবুগঞ্জ", "বানারীপাড়া", "মেহেন্দিগঞ্জ", "মুলাদী", "হিজলা", "উজিরপুর"],
+    "ভোলা": ["সদর", "বোরহানউদ্দিন", "চরফ্যাশন", "দৌলতখান", "লালমোহন", "মনপুরা", "তজুমদ্দিন"],
+    "ঝালকাঠি": ["সদর", "কাঠালিয়া", "নলছিটি", "রাজাপুর"],
+    "পিরোজপুর": ["সদর", "ভাণ্ডারিয়া", "কাউখালী", "মঠবাড়িয়া", "নাজিরপুর", "নেছারাবাদ", "ইন্দুরকানী"],
+    "পটুয়াখালী": ["সদর", "বাউফল", "দশমিনা", "গলাচিপা", "কলাাপাড়া", "মির্জাগঞ্জ", "দুমকি", "রাঙ্গাবালী"],
+    "বরগুনা": ["সদর", "আমতলী", "বামনা", "বেতাগী", "পাথরঘাটা", "তালতলী"],
+    "সিলেট": ["কোতোয়ালী", "গোলাপগঞ্জ", "বিয়ানীবাজার", "বালাগঞ্জ", "কোম্পানীগঞ্জ", "ফেঞ্চুগঞ্জ", "জৈন্তাপুর", "কানাইঘাট", "জকিগঞ্জ", "বিশ্বনাথ", "দক্ষিণ সুরমা", "গোয়াইনঘাট", "ওসমানীনগর"],
+    "মৌলভীবাজার": ["সদর", "বড়লেখা", "জুড়ী", "কমলগঞ্জ", "কুলাউড়া", "রাজনগর", "শ্রীমঙ্গল"],
+    "হবিগঞ্জ": ["সদর", "আজমিরীগঞ্জ", "বাহুবল", "বানিয়াচং", "চুনারুঘাট", "নবীগঞ্জ", "মাধবপুর", "লাখাই", "শায়স্তাগঞ্জ"],
+    "সুনামগঞ্জ": ["সদর", "বিশ্বম্ভরপুর", "ছাতক", "দেরাই", "ধর্মপাশা", "দোয়ারাবাজার", "জগন্নাথপুর", "জামালগঞ্জ", "শাল্লা", "তাজপুর", "দক্ষিণ সুনামগঞ্জ", "মধ্যনগর"],
+    "রংপুর": ["কোতোয়ালী", "মিঠাপুকুর", "কাউনিয়া", "বদোরগঞ্জ", "গঙ্গাচড়া", "পীরগাছা", "পীরগঞ্জ", "তারাগঞ্জ"],
+    "দিনাজপুর": ["সদর", "বিরামপুর", "বীরগঞ্জ", "বোচাগঞ্জ", "ফুলবাড়ী", "ঘোড়াঘাট", "হাকিমপুর", "কাহারোল", "খানসামা", "খানপুর", "নবাবগঞ্জ", "পার্বতীপুর", "চিরিরবন্দর"],
+    "কুড়িগ্রাম": ["সদর", "ভুরুঙ্গামারী", "চর রাজিবপুর", "চিলমারী", "ফুলবাড়ী", "নাগেশ্বরী", "রাজারহাট", "রৌমারী", "উলিপুর"],
+    "গাইবান্ধা": ["সদর", "ফুলছড়ি", "গোবিন্দগঞ্জ", "পলাশবাড়ী", "সাদুল্লাপুর", "সাঘাটা", "সুন্দরগঞ্জ"],
+    "নীলফামারী": ["সদর", "সৈয়দপুর", "ডোমার", "ডিমলা", "জলঢাকা", "কিশোরগঞ্জ"],
+    "লালমনিরহাট": ["সদর", "আদিতমারী", "কালীগঞ্জ", "হাতীবান্ধা", "পাটগ্রাম"],
+    "ঠাকুরগাঁও": ["সদর", "পীরগঞ্জ", "রাণীশংকৈল", "হরিপুর", "বালিয়াডাঙী"],
+    "পঞ্চগড়": ["সদর", "আটোয়ারী", "বোদা", "দেবীগঞ্জ", "তেঁতুলিয়া"],
+    "ময়মনসিংহ": ["কোতোয়ালী", "মুক্তাগাছা", "ত্রিশাল", "ভালুকা", "গফরগাঁও", "গৌরীপুর", "হালুয়াঘাট", "ঈশ্বরগঞ্জ", "নন্দাইল", "ফুলবাড়ীয়া", "ফুলপুর", "ধোবাউড়া", "তারাশুরা"],
+    "জামালপুর": ["সদর", "বক্সীগঞ্জ", "দেওয়ানগঞ্জ", "ইসলামপুর", "মাদারগঞ্জ", "মেলান্দহ", "সরিষাবাড়ী"],
+    "নেত্রকোনা": ["সদর", "আটপাড়া", "বারহাট্টা", "দুর্গাপুর", "কলমাকান্দা", "কেন্দুয়া", "মদন", "মোহনগঞ্জ", "পূর্বধলা", "খালিয়াজুড়ি"],
+    "শেরপুর": ["সদর", "ঝিনাইগাতী", "নকলা", "নালিতাবাড়ী", "শ্রীবরদী"]
+  };
+
+  const districtSelect = document.getElementById("district");
+  const upazilaSelect = document.getElementById("upazila");
+
+  Object.keys(districtThanas).sort().forEach(district => {
+    const option = document.createElement("option");
+    option.value = district;
+    option.textContent = district;
+    districtSelect.appendChild(option);
+  });
+
+  function loadUpazilas() {
+    const selectedDistrict = districtSelect.value;
+    upazilaSelect.innerHTML = '<option value="">থানা / উপজেলা নির্বাচন করুন</option>';
+
+    if (selectedDistrict && districtThanas[selectedDistrict]) {
+      districtThanas[selectedDistrict].sort().forEach(upazila => {
+        const option = document.createElement("option");
+        option.value = upazila;
+        option.textContent = upazila;
+        upazilaSelect.appendChild(option);
+      });
+    }
+  }
+
+  function copyNumber() {
+    const phoneNumber = "09658699887";
+    navigator.clipboard.writeText(phoneNumber).then(() => {
+      const copyBtn = document.getElementById("copyBtn");
+      copyBtn.textContent = "কপি হয়েছে!";
+      setTimeout(() => { copyBtn.textContent = "কপি করুন"; }, 2000);
+    });
+  }
+
+  /* টেলিগ্রাম এবং আপডেট হওয়া হোয়াটসঅ্যাপ মেসেজ সাবমিট কোড */
+  document.getElementById("orderForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.innerText = "প্রসেস হচ্ছে...";
+    submitBtn.disabled = true;
+
+    // ১. টেলিগ্রাম বটের তথ্য
+    const telegramBotToken = "8979170662:AAFicZfzd7FFCF2E2XdRfxNz_Uyb3KGVoDE"; 
+    const telegramChatId = "7603743816";     
+
+    // ২. Green API (WhatsApp) বটের তথ্য
+    const idInstance = "710722741031"; 
+    const apiTokenInstance = "32558964f5ac463184cf7fed6816e833253d75182aed4cae87"; 
+
+    // ফর্মের ইনপুট সংগ্রহ
+    const name = document.getElementById("name").value;
+    let rawPhone = document.getElementById("phone").value;
+    const district = document.getElementById("district").value;
+    const upazila = document.getElementById("upazila").value;
+    const village = document.getElementById("village").value;
+    const address = document.getElementById("address").value;
+
+    // হোয়াটসঅ্যাপের জন্য ফোন নম্বরের সামনে ৮৮ যুক্ত করা
+    let waPhone = rawPhone;
+    if (waPhone.startsWith("0")) {
+      waPhone = "88" + waPhone;
+    }
+
+    // --- টেলিগ্রাম মেসেজ (আপনার কাছে যাবে) ---
+    const telegramTextMessage = `🛒 *NF WORLD - নতুন অর্ডার!*%0A%0A` +
+                                `👤 *নাম:* ${encodeURIComponent(name)}%0A` +
+                                `📞 *মোবাইল:* ${encodeURIComponent(rawPhone)}%0A` +
+                                `📍 *জেলা:* ${encodeURIComponent(district)}%0A` +
+                                `🏘️ *থানা/উপজেলা:* ${encodeURIComponent(upazila)}%0A` +
+                                `🏡 *গ্রাম/এলাকা:* ${encodeURIComponent(village)}%0A` +
+                                `📝 *ঠিকানা:* ${encodeURIComponent(address)}`;
+
+    const telegramApiUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${telegramChatId}&text=${telegramTextMessage}&parse_mode=Markdown`;
+
+    // --- নতুন ডিজাইনে আপডেটেড হোয়াটসঅ্যাপ মেসেজ (কাস্টমারের কাছে যাবে) ---
+    const waMessageText = `✨ প্রিয় ${name}, ✨\n\n` +
+                          `NF world 🌎✨-এ আপনার অর্ডার ফরমটি সফলভাবে সাবমিট হয়েছে ✅\n\n` +
+                          `━━━━━━━━━━━━━━━━━━\n` +
+                          `🛍️ অর্ডারের বিবরণ:\n` +
+                          `📱 মোবাইল: ${rawPhone}\n` +
+                          `📍 জেলা: ${district} | থানা: ${upazila}\n` +
+                          `🏡 গ্রাম: ${village}\n` +
+                          `📝 ঠিকানা: ${address}\n` +
+                          `━━━━━━━━━━━━━━━━━━\n\n` +
+                          `📞 আগামী ২৪ ঘন্টার মধ্যে NF world 🌎✨-এর একজন প্রতিনিধি কল করে আপনার অর্ডারটি নিশ্চিত করবেন।\n\n` +
+                          `🚚 অর্ডার কনফার্ম হওয়ার ৩ থেকে ৪ দিনের মধ্যে পার্সেলটি আপনার হাতে পৌঁছে যাবে, ইনশাআল্লাহ্।\n\n` +
+                          `☎️ ইমারজেন্সি হটলাইন: 09658-699887\n\n` +
+                          `💖 আমাদের সাথে থাকার জন্য আপনাকে আন্তরিক ধন্যবাদ!`;
+
+    // টেলিগ্রাম এবং হোয়াটসঅ্যাপ এপিআই রিকোয়েস্ট একসাথে পাঠানো
+    Promise.all([
+      // টেলিগ্রামে পাঠানো
+      fetch(telegramApiUrl),
+      // হোয়াটসঅ্যাপে পাঠানো
+      fetch(`https://api.green-api.com/waInstance${idInstance}/sendMessage/${apiTokenInstance}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chatId: `${waPhone}@c.us`,
+          message: waMessageText
+        })
+      })
+    ])
+    .then(() => {
+      // সফল হলে কনফার্মেশন পেজ দেখাবে
+      document.getElementById("mainHeader").style.display = "none";
+      document.getElementById("orderForm").style.display = "none";
+      document.getElementById("successMessage").style.display = "block";
+    })
+    .catch(error => {
+      console.error("Error submitting order:", error);
+      alert("অর্ডার সাবমিট করতে সমস্যা হয়েছে, আবার চেষ্টা করুন।");
+      submitBtn.innerText = "অর্ডার কনফার্ম করুন";
+      submitBtn.disabled = false;
+    });
+  });
+</script>
+
+</body>
+</html>
